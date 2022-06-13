@@ -7,11 +7,13 @@ class ClassifyController extends Controller {
   //  查 所有分类
   async index() {
     const ctx = this.ctx;
-    const res = await ctx.model.Classify.findAll();
+    const res = await ctx.model.Classify.findAll({
+      order: [['created_at', 'DESC']]
+    });
     ctx.body = {
       code: 200,
       msg: '列表获取成功',
-      data: res,
+      data: res
     };
   }
   //  增 增加分类
@@ -21,7 +23,7 @@ class ClassifyController extends Controller {
     if (!className) {
       ctx.body = {
         code: 500,
-        msg: '分类名称不能为空',
+        msg: '分类名称不能为空'
       };
     }
     const classify = await ctx.model.Classify.create({ id: uuidv4(), class_name: className });
@@ -29,7 +31,7 @@ class ClassifyController extends Controller {
     ctx.body = {
       code: 200,
       msg: '增加成功',
-      data: classify,
+      data: classify
     };
   }
   //  删
@@ -37,11 +39,11 @@ class ClassifyController extends Controller {
     const ctx = this.ctx;
     const { id } = ctx.query;
     await ctx.model.Classify.destroy({
-      where: { id },
+      where: { id }
     });
     ctx.body = {
       code: 200,
-      msg: '删除成功',
+      msg: '删除成功'
     };
   }
   //  改
@@ -52,12 +54,12 @@ class ClassifyController extends Controller {
     await ctx.model.Classify.update(
       { class_name: className },
       {
-        where: { id },
-      },
+        where: { id }
+      }
     );
     ctx.body = {
       code: 200,
-      msg: '修改成功',
+      msg: '修改成功'
     };
   }
 }

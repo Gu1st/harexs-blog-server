@@ -6,7 +6,9 @@ class CommentController extends Controller {
   //  查 所有评论
   async index() {
     const ctx = this.ctx;
-    const res = await ctx.model.Comment.findAll();
+    const res = await ctx.model.Comment.findAll({
+      order: [['created_at', 'DESC']]
+    });
     ctx.body = {
       code: 200,
       msg: '列表获取成功',

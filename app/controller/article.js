@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 const { Op } = require('sequelize');
 
 class ArticleController extends Controller {
+  //  得到默认的文章列表
   async index() {
     const ctx = this.ctx;
     const total = await ctx.model.Article.count();
@@ -11,7 +12,8 @@ class ArticleController extends Controller {
     const res = await ctx.model.Article.findAll({
       attributes: { exclude: ['content'] },
       offset: (page - 1) * 7,
-      limit: count
+      limit: count,
+      order: [['created_at', 'DESC']]
     });
     ctx.body = {
       code: 200,
@@ -38,7 +40,8 @@ class ArticleController extends Controller {
         classify_id: {
           [Op.substring]: cid
         }
-      }
+      },
+      order: [['created_at', 'DESC']]
     });
     ctx.body = {
       code: 200,
@@ -65,7 +68,8 @@ class ArticleController extends Controller {
         title: {
           [Op.substring]: content
         }
-      }
+      },
+      order: [['created_at', 'DESC']]
     });
     ctx.body = {
       code: 200,

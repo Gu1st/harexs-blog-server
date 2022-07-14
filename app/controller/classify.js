@@ -1,5 +1,4 @@
 'use strict';
-const { v4: uuidv4 } = require('uuid');
 
 const Controller = require('egg').Controller;
 
@@ -26,7 +25,7 @@ class ClassifyController extends Controller {
         msg: '分类名称不能为空'
       };
     }
-    const classify = await ctx.model.Classify.create({ id: uuidv4(), class_name: className });
+    const classify = await ctx.model.Classify.create({ class_name: className });
     ctx.status = 201;
     ctx.body = {
       code: 200,

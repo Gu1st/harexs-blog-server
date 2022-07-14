@@ -1,6 +1,5 @@
 'use strict';
 const Controller = require('egg').Controller;
-const { v4: uuidv4 } = require('uuid');
 const { Op } = require('sequelize');
 
 class ArticleController extends Controller {
@@ -101,7 +100,6 @@ class ArticleController extends Controller {
     cidList = cidList.slice(0, cidList.length - 1);
 
     const Res = await ctx.model.Article.create({
-      id: uuidv4(),
       title,
       desc,
       content,

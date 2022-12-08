@@ -9,4 +9,5 @@ module.exports = app => {
   // app.jwt
   router.get('/', controller.home.index);
   router.get('/home', controller.home.home);
+  router.get('/classifyToBlog', controller.classify.index);
 };

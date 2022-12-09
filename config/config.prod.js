@@ -31,7 +31,8 @@ module.exports = appInfo => {
       }
     },
     jwt: {
-      secret: 'gu1st'
+      secret: 'gu1st',
+      expiresIn: '1d'
     },
     security: {
       csrf: {
